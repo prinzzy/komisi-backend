@@ -9,15 +9,15 @@ const calculateCommission = (omzet) => {
   return 0;
 };
 
-// Get the commission data per transaction for each marketing
+
 router.get("/", async (req, res) => {
   try {
-    const currentYear = 2023; // Hardcode tahun 2023 karena data di database hanya untuk tahun tersebut
-    const year = req.query.year || currentYear; // Gunakan parameter query atau default ke tahun 2023
+    const currentYear = 2023; 
+    const year = req.query.year || currentYear; 
 
     console.log("Fetching transactions for year:", year);
 
-    // Query untuk mengambil semua transaksi per marketing dalam tahun tertentu
+
     const query = `
       SELECT 
         m.name AS marketing,
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 
     console.log("Query Result:", result.rows);
 
-    // Struktur data untuk hasil akhir
+
     const commissionsData = {};
 
     result.rows.forEach((row) => {
@@ -46,24 +46,22 @@ router.get("/", async (req, res) => {
       const komisiPersen = calculateCommission(omzet);
       const komisiNominal = omzet * komisiPersen;
 
-      // Jika marketing belum ada di object, inisialisasi
       if (!commissionsData[row.marketing]) {
         commissionsData[row.marketing] = [];
       }
 
-      // Tambahkan transaksi ke dalam array marketing terkait
       commissionsData[row.marketing].push({
-        transaction_number: row.transaction_number, // Ganti invoice_id dengan transaction_number
+        transaction_number: row.transaction_number, 
         tanggal_transaksi: row.tanggal_transaksi,
         omzet: omzet,
-        komisi_persen: komisiPersen * 100, // Konversi ke persen
+        komisi_persen: komisiPersen * 100,
         komisi_nominal: komisiNominal,
       });
     });
 
     console.log("Final Data:", commissionsData);
 
-    // Format data untuk response
+  
     const data = Object.keys(commissionsData).map((marketing) => ({
       marketing,
       transactions: commissionsData[marketing],
