@@ -20,7 +20,7 @@ DB_USER=your-db-user
 DB_PASSWORD=your-db-password
 DB_NAME=your-db-name
 
-lalu import database komisi yang telah tersedia terlebih dahulu
+import database sales_db.sql yang telah tersedia terlebih dahulu menggunakan PgAdmin
 
 ### 3. Jalankan Backend (Express.js)
 
