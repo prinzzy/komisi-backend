@@ -18,7 +18,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_USER=your-db-user
 DB_PASSWORD=your-db-password
-DB_NAME=your-db-name
+DB_NAME=sales_db
 
 import database sales_db.sql yang telah tersedia terlebih dahulu menggunakan PgAdmin
 
